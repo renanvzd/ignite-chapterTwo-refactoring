@@ -92,7 +92,9 @@ class Dashboard extends Component {
         <Header openModal={this.toggleModal} />
         <ModalAddFood
           isOpen={modalOpen}
+          // Abrir o modal
           setIsOpen={this.toggleModal}
+          // Fechar o modal depois de incluir
           handleAddFood={this.handleAddFood}
         />
         <ModalEditFood
