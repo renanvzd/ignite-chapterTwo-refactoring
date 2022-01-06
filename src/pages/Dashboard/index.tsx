@@ -10,17 +10,10 @@ import { FoodsContainer } from './styles';
 interface IFood {
   id: number;
   name: string;
-  description: string;
   price: string;
+  description: string;
   available: boolean;
   image: string;
-}
-
-interface AddFood {
-  image: string;
-  name: string;
-  price: string;
-  description: string;
 }
 
 export default function Dashboard() {
@@ -54,15 +47,15 @@ export default function Dashboard() {
     }
   }
 
-  const handleUpdateFood = async (food: AddFood): Promise<void> => {
+  const handleUpdateFood = async (food: Omit<IFood, 'id' | 'available'>): Promise<void> => {
     try {
       const foodUpdated = await api.put(
         `/foods/${editingFood.id}`,
         { ...editingFood, ...food },
       );
 
-      const foodsUpdated = foods.map(f =>
-        f.id !== foodUpdated.data.id ? f : foodUpdated.data,
+      const foodsUpdated = foods.map(food =>
+        food.id !== foodUpdated.data.id ? food : foodUpdated.data,
       );
 
       setFoods(foodsUpdated);
